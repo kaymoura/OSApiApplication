@@ -2,6 +2,7 @@ package br.eti.kge.OSApiApplication.api.controller;
 
 import br.eti.kge.OSApiApplication.domain.model.Cliente;
 import br.eti.kge.OSApiApplication.domain.repository.ClienteRepository;
+import br.eti.kge.OSApiApplication.domain.service.ClienteService;
 import java.util.List;
 import java.util.Optional;
 import javax.validation.Valid;
@@ -27,6 +28,9 @@ public class ClienteController {
     @Autowired
     private ClienteRepository clienteRepository;
     
+    @Autowired
+    private ClienteService clienteService;
+    
     @GetMapping("/clientes") // Listar
     public List<Cliente> listas() {
        
@@ -49,7 +53,7 @@ public class ClienteController {
     @PostMapping("/clientes")
     @ResponseStatus(HttpStatus.CREATED)
     public Cliente adicionar(@Valid @RequestBody Cliente cliente) {
-        return clienteRepository.save(cliente);
+        return clienteService.salvar(cliente);
     }
     
     @PutMapping("/clientes/{clienteID}")
@@ -61,7 +65,7 @@ public class ClienteController {
         }
         
         cliente.setId(clienteID);
-        cliente = clienteRepository.save(cliente);
+        cliente = clienteService.salvar(cliente);
         return ResponseEntity.ok(cliente);
     }
     
@@ -73,7 +77,7 @@ public class ClienteController {
             return ResponseEntity.notFound().build();
         }
         
-       clienteRepository.deleteById(clienteID);
+       clienteService.excluir(clienteID);
        return ResponseEntity.noContent().build();
     }
     
