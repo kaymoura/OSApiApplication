@@ -24,7 +24,21 @@ public class OrdemServicoService {
         return ordemServicoRepository.save(ordemServico);
     } 
     
-//    public void excluir(Long cliente_Id) {
-//        ordemServicoRepository.deleteById(cliente_Id);
-//    }
+    public OrdemServico finalizar(OrdemServico ordemServico) {
+        ordemServico.setStatus(StatusOrdemServico.FINALIZADA);
+        ordemServico.setDataFinalizacao(LocalDateTime.now());
+       
+        return ordemServicoRepository.save(ordemServico);
+    }
+    
+    public OrdemServico cancelar(OrdemServico ordemServicoID) {
+        ordemServicoID.setStatus(StatusOrdemServico.CANCELADA);
+        ordemServicoID.setDataFinalizacao(LocalDateTime.now());
+        
+        return ordemServicoRepository.save(ordemServicoID);
+    }
+    
+    public void excluir(Long OrdemServico_Id) {
+        ordemServicoRepository.deleteById(OrdemServico_Id);
+    }
 }

@@ -1,9 +1,8 @@
 package br.eti.kge.OSApiApplication.domain.repository;
 
 import br.eti.kge.OSApiApplication.domain.model.OrdemServico;
-//import java.util.List;
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
-//import org.springframework.stereotype.Repository;
 
 /**
  *
@@ -11,6 +10,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 //@Repository
 public interface OrdemServicoRepository  extends JpaRepository<OrdemServico, Long>{
-//    List<OrdemServico> findById(long id);
-//    OrdemServico deleteById(long id);
+    List<OrdemServico> findById(long id);
+    List<OrdemServico> findByDescricao(String descricao);
+    OrdemServico deleteById(long id);
 }
